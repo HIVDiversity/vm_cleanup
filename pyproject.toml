@@ -1,8 +1,19 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
 [project]
 name = "vm-cleanup"
-version = "0.1.0"
-description = "Add your description here"
+version = "0.1.1"
+description = "Tool to help inventory and clean up a VM."
 authors = [{ name = "Daniel Le Jeune", email = "daniel.h.lejeune@gmail.com" }]
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = ["loguru>=0.7.3", "rich>=15.0.0", "typer>=0.25.1"]
+
+
+[project.scripts]
+vm-cleanup = "vm_cleanup.main:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/vm_cleanup"]
