@@ -58,13 +58,6 @@ def inventory_command(
         "-v",
         help="Enable debug-level logging.",
     ),
-    skip_junk: bool = typer.Option(False, "--skip-junk", help="Skip junk file scan."),
-    skip_stale: bool = typer.Option(
-        False, "--skip-stale", help="Skip stale file scan (can be slow)."
-    ),
-    skip_uncompressed: bool = typer.Option(
-        False, "--skip-uncompressed", help="Skip uncompressed file scan."
-    ),
 ):
     """
     Audit a lab storage directory and produce TSV reports.
@@ -87,28 +80,7 @@ def inventory_command(
 
     start = datetime.now()
 
-    inventory.audit_files_by_year(data_dir, out_dir)
-    inventory.audit_usage_by_owner(data_dir, out_dir)
-    inventory.audit_file_types(data_dir, out_dir)
-
-    if not skip_stale:
-        inventory.audit_stale_files(data_dir, out_dir, stale_days)
-    else:
-        logger.warning("Skipping stale file scan (--skip-stale)")
-
-    inventory.audit_orphaned_dirs(data_dir, out_dir, orphan_depth)
-
-    if not skip_uncompressed:
-        inventory.audit_uncompressed_large(data_dir, out_dir, min_size_mb)
-    else:
-        logger.warning("Skipping uncompressed file scan (--skip-uncompressed)")
-
-    if not skip_junk:
-        inventory.audit_junk_files(data_dir, out_dir)
-    else:
-        logger.warning("Skipping junk file scan (--skip-junk)")
-
-    inventory.write_summary(out_dir, data_dir, stale_days, min_size_mb)
+    inventory.audit(data_dir, out_dir, stale_days, min_size_mb)
 
     elapsed = datetime.now() - start
     logger.success(f"Audit complete in {elapsed}. Reports in: {out_dir.resolve()}")

@@ -3,6 +3,29 @@ from pathlib import Path
 from loguru import logger
 import csv
 import pwd
+from dataclasses import dataclass
+import sys
+
+
+@dataclass
+class StaleFile:
+    last_modified: str
+    size_bytes: str
+    path: str
+
+
+@dataclass
+class LargeFile:
+    extension: str
+    size_bytes: str
+    path: str
+
+
+@dataclass
+class JunkFile:
+    extension: str
+    size_gb: str
+    path: str
 
 
 def write_tsv(path: Path, rows: list[dict], fieldnames: list[str]) -> None:
@@ -27,7 +50,7 @@ def configure_logging(log_file: Path | None, verbose: bool) -> None:
     logger.remove()
     level = "DEBUG" if verbose else "INFO"
     logger.add(
-        lambda msg: typer.echo(msg, err=True),
+        sys.stderr,
         level=level,
         colorize=True,
         format="<green>{time:HH:mm:ss}</green> | <level>{level:<8}</level> | {message}",

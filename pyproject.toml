@@ -9,7 +9,12 @@ description = "Tool to help inventory and clean up a VM."
 authors = [{ name = "Daniel Le Jeune", email = "daniel.h.lejeune@gmail.com" }]
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = ["loguru>=0.7.3", "rich>=15.0.0", "typer>=0.25.1"]
+dependencies = [
+    "alive-progress>=3.3.0",
+    "loguru>=0.7.3",
+    "rich>=15.0.0",
+    "typer>=0.25.1",
+]
 
 
 [project.scripts]
