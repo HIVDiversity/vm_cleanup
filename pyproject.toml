@@ -1,0 +1,8 @@
+[project]
+name = "vm-cleanup"
+version = "0.1.0"
+description = "Add your description here"
+authors = [{ name = "Daniel Le Jeune", email = "daniel.h.lejeune@gmail.com" }]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
