@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "vm-cleanup"
-version = "0.1.1"
+version = "0.2.0"
 description = "Tool to help inventory and clean up a VM."
 authors = [{ name = "Daniel Le Jeune", email = "daniel.h.lejeune@gmail.com" }]
 readme = "README.md"
