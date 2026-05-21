@@ -6,7 +6,7 @@ from loguru import logger
 
 from vm_cleanup import utils, inventory
 
-app = typer.Typer()
+app = typer.Typer(add_completion=False)
 
 
 @app.command("inventory")
